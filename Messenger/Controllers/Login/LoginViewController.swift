@@ -148,7 +148,7 @@ class LoginViewController: UIViewController {
     
     func alertUserLoginPasswordError() {
         let alert = UIAlertController(title: "Password Error!",
-                                      message: "Please enter password more than 6 letters",
+                                      message: "Password must contain atleast 6 characters",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
         present(alert, animated: true)
