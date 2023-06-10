@@ -23,6 +23,7 @@
 		518B57CB2A2BB46C001FFD10 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518B57CA2A2BB46C001FFD10 /* Extensions.swift */; };
 		518B57CD2A2D0975001FFD10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 518B57CC2A2D0975001FFD10 /* GoogleService-Info.plist */; };
 		AA15C828767F83A967D9C259 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0237EC8F4CBB5A49C296C787 /* Pods_Messenger.framework */; };
+		F0D76A472A3497B900BB3F88 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = F0D76A462A3497B900BB3F88 /* FacebookLogin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		518B57CA2A2BB46C001FFD10 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		518B57CC2A2D0975001FFD10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		92689267DD6668908F976BE6 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
+		F03575592A348AEE00DD098F /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0D76A472A3497B900BB3F88 /* FacebookLogin in Frameworks */,
 				AA15C828767F83A967D9C259 /* Pods_Messenger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +103,7 @@
 		518B57A12A2BA8C1001FFD10 /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				F03575592A348AEE00DD098F /* Messenger.entitlements */,
 				518B57CC2A2D0975001FFD10 /* GoogleService-Info.plist */,
 				518B57BB2A2BAAC6001FFD10 /* Resources */,
 				518B57B92A2BAAA7001FFD10 /* ViewModels */,
@@ -194,6 +198,9 @@
 			dependencies = (
 			);
 			name = Messenger;
+			packageProductDependencies = (
+				F0D76A462A3497B900BB3F88 /* FacebookLogin */,
+			);
 			productName = Messenger;
 			productReference = 518B579F2A2BA8C1001FFD10 /* Messenger.app */;
 			productType = "com.apple.product-type.application";
@@ -222,6 +229,9 @@
 				Base,
 			);
 			mainGroup = 518B57962A2BA8C1001FFD10;
+			packageReferences = (
+				F0D76A452A3497B900BB3F88 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = 518B57A02A2BA8C1001FFD10 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -448,6 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Messenger/Messenger.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YYRM2HX2Q;
@@ -481,6 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Messenger/Messenger.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YYRM2HX2Q;
@@ -530,6 +542,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F0D76A452A3497B900BB3F88 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F0D76A462A3497B900BB3F88 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0D76A452A3497B900BB3F88 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 518B57972A2BA8C1001FFD10 /* Project object */;
 }
