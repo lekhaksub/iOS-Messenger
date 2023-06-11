@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
+import GoogleSignIn
 
 class ProfileViewController: UIViewController {
 
@@ -53,6 +54,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
 //            Log Out Facebook
             FBSDKLoginKit.LoginManager().logOut()
+            
+//            Log Out Google
             
             do {
                 try FirebaseAuth.Auth.auth().signOut()

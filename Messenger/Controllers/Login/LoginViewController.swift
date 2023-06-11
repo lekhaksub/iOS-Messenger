@@ -7,7 +7,9 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseCore
 import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
@@ -72,10 +74,17 @@ class LoginViewController: UIViewController {
     
     private let facebookLoginButton: FBLoginButton = {
         let button = FBLoginButton()
+        button.layer.cornerRadius = 12
         button.permissions = ["public_profile", "email"]
         return button
     }()
 
+    private let googleSignInButton: GIDSignInButton = {
+        let button = GIDSignInButton()
+        button.layer.cornerRadius = 12
+        button.addTarget(Any?.self, action: #selector(googleSignIn), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +111,7 @@ class LoginViewController: UIViewController {
         scrollView.addSubview(passwordField)
         scrollView.addSubview(loginButton)
         scrollView.addSubview(facebookLoginButton)
+        scrollView.addSubview(googleSignInButton)
         
     }
     
@@ -130,6 +140,11 @@ class LoginViewController: UIViewController {
                                   width: scrollView.width - 60,
                                  height: 52)
         facebookLoginButton.frame.origin.y = loginButton.bottom + 20
+        googleSignInButton.frame = CGRect(x: 30,
+                                  y: facebookLoginButton.bottom + 10,
+                                  width: scrollView.width - 60,
+                                 height: 52)
+        googleSignInButton.frame.origin.y = facebookLoginButton.bottom + 10
     }
     
     @objc private func loginButtonTapped() {
@@ -188,8 +203,49 @@ class LoginViewController: UIViewController {
         vc.title = "Create Account"
         navigationController?.pushViewController(vc, animated: true)
     }
+//    Google Sign In
+    
+    @objc func googleSignIn() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
 
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
 
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
+          guard error == nil else {
+            // ...
+              return
+          }
+
+          guard let user = result?.user,
+            let idToken = user.idToken?.tokenString
+          else {
+            // ...
+              return
+          }
+
+          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                         accessToken: user.accessToken.tokenString)
+
+            Auth.auth().signIn(with: credential) {[weak self] result, error in
+                guard let strongSelf = self else {
+                    return
+                }
+                guard result != nil, error == nil else {
+                    if let error = error {
+                        print("Google credential login failed - \(error.localizedDescription)")
+                    }
+                    return
+                }
+                print("Successfully logged user in with Google")
+                strongSelf.navigationController?.dismiss(animated: true)
+              // At this point, our user is signed in
+            }
+                
+        }
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -205,6 +261,8 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 }
+
+//  Facebook Sign In
 
 extension LoginViewController: LoginButtonDelegate {
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginKit.FBLoginButton) {
@@ -262,7 +320,7 @@ extension LoginViewController: LoginButtonDelegate {
                     return
                 }
                 
-                print("Successfully loggen user in")
+                print("Successfully logged user in with Facebook")
                 strongSelf.navigationController?.dismiss(animated: true)
                 
             })
