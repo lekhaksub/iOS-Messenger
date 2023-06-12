@@ -4,4 +4,5 @@
 ### CocoaPods
 ### Firebase
 ### Facebook Login
+### Google Signin
 

@@ -86,8 +86,20 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private var loginObserver: NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLoginNotification,
+                                                               object: nil,
+                                                               queue: .main,
+                                                               using: { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.navigationController?.dismiss(animated: true)
+        })
         title = "Log In"
         view.backgroundColor = .white
         
@@ -115,6 +127,12 @@ class LoginViewController: UIViewController {
         
     }
     
+    deinit {
+        if let observer = loginObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
@@ -139,12 +157,10 @@ class LoginViewController: UIViewController {
                                   y: loginButton.bottom + 10,
                                   width: scrollView.width - 60,
                                  height: 52)
-        facebookLoginButton.frame.origin.y = loginButton.bottom + 20
         googleSignInButton.frame = CGRect(x: 30,
                                   y: facebookLoginButton.bottom + 10,
                                   width: scrollView.width - 60,
                                  height: 52)
-        googleSignInButton.frame.origin.y = facebookLoginButton.bottom + 10
     }
     
     @objc private func loginButtonTapped() {
@@ -207,29 +223,43 @@ class LoginViewController: UIViewController {
     
     @objc func googleSignIn() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
+        
         // Create Google Sign In configuration object.
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
-
+        
         // Start the sign in flow!
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
-          guard error == nil else {
-            // ...
-              return
-          }
-
-          guard let user = result?.user,
-            let idToken = user.idToken?.tokenString
-          else {
-            // ...
-              return
-          }
-
-          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                         accessToken: user.accessToken.tokenString)
-
-            Auth.auth().signIn(with: credential) {[weak self] result, error in
+            guard error == nil else {
+                return
+            }
+            
+            guard let user = result?.user,
+                  let idToken = user.idToken?.tokenString
+            else {
+                return
+            }
+            print("Did sign in with Google \(user)")
+            
+            guard let email = user.profile?.email,
+                  let firstName = user.profile?.givenName,
+                  let lastName = user.profile?.familyName else {
+                return
+            }
+            
+            DatabaseManager.shared.userExists(with: email, completion: { exists in
+                if !exists {
+//                    insert to database
+                    DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
+                                                                        lastName: lastName,
+                                                                        emailAddress: email))
+                }
+            })
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: user.accessToken.tokenString)
+            
+            FirebaseAuth.Auth.auth().signIn(with: credential) {[weak self] result, error in
                 guard let strongSelf = self else {
                     return
                 }
@@ -239,11 +269,12 @@ class LoginViewController: UIViewController {
                     }
                     return
                 }
-                print("Successfully logged user in with Google")
+                print("Successfully signed in with Google")
+                NotificationCenter.default.post(name: .didLoginNotification, object: nil)
                 strongSelf.navigationController?.dismiss(animated: true)
-              // At this point, our user is signed in
+                // At this point, our user is signed in
             }
-                
+            
         }
     }
 }
