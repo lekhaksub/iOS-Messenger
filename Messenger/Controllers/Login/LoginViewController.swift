@@ -180,6 +180,7 @@ class LoginViewController: UIViewController {
             alertUserLoginPasswordError()
             return
         }
+        
 //        Firebase login
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
             guard let strongSelf = self else {
@@ -194,7 +195,6 @@ class LoginViewController: UIViewController {
             print("Logged In User: \(user)")
             strongSelf.navigationController?.dismiss(animated: true)
         })
-        
     }
     
     func alertUserLoginError() {
@@ -213,14 +213,13 @@ class LoginViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    
     @objc func didTapRegister() {
         let vc = RegisterViewController()
         vc.title = "Create Account"
         navigationController?.pushViewController(vc, animated: true)
     }
-//    Google Sign In
     
+//    Google Sign In
     @objc func googleSignIn() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
@@ -258,7 +257,6 @@ class LoginViewController: UIViewController {
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                            accessToken: user.accessToken.tokenString)
-            
             FirebaseAuth.Auth.auth().signIn(with: credential) {[weak self] result, error in
                 guard let strongSelf = self else {
                     return
@@ -271,7 +269,6 @@ class LoginViewController: UIViewController {
                 }
                 print("Successfully signed in with Google")
                 NotificationCenter.default.post(name: .didLoginNotification, object: nil)
-                strongSelf.navigationController?.dismiss(animated: true)
                 // At this point, our user is signed in
             }
             
@@ -288,7 +285,6 @@ extension LoginViewController: UITextFieldDelegate {
         else if textField == passwordField {
             loginButtonTapped()
         }
-        
         return true
     }
 }
@@ -337,7 +333,6 @@ extension LoginViewController: LoginButtonDelegate {
                     DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName, lastName: lastName, emailAddress: email))
                 }
             })
-            
             let credential = FacebookAuthProvider.credential(withAccessToken: token)
             FirebaseAuth.Auth.auth().signIn(with: credential, completion: {[weak self] authResult, error in
                 guard let strongSelf = self else {
@@ -350,13 +345,9 @@ extension LoginViewController: LoginButtonDelegate {
                     
                     return
                 }
-                
                 print("Successfully logged user in with Facebook")
                 strongSelf.navigationController?.dismiss(animated: true)
-                
             })
         })
-        
-        
     }
 }
