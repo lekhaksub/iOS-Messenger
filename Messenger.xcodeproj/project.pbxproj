@@ -22,6 +22,12 @@
 		518B57C82A2BAC72001FFD10 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518B57C72A2BAC72001FFD10 /* ProfileViewController.swift */; };
 		518B57CB2A2BB46C001FFD10 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518B57CA2A2BB46C001FFD10 /* Extensions.swift */; };
 		AA15C828767F83A967D9C259 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0237EC8F4CBB5A49C296C787 /* Pods_Messenger.framework */; };
+		F01F543F2A3A36B800635175 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = F01F543E2A3A36B800635175 /* JGProgressHUD */; };
+		F01F54422A3A379000635175 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = F01F54412A3A379000635175 /* MessageKit */; };
+		F01F54452A3A38A500635175 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F01F54442A3A38A500635175 /* Realm */; };
+		F01F54472A3A38A500635175 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F01F54462A3A38A500635175 /* RealmSwift */; };
+		F01F544A2A3A38F100635175 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = F01F54492A3A38F100635175 /* SDWebImage */; };
+		F01F544C2A3A3CD500635175 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01F544B2A3A3CD500635175 /* ChatViewController.swift */; };
 		F055F7B32A358F870043C750 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F055F7B22A358F870043C750 /* GoogleService-Info.plist */; };
 		F055F7B62A35907B0043C750 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F055F7B52A35907B0043C750 /* GoogleSignIn */; };
 		F055F7B82A35907B0043C750 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F055F7B72A35907B0043C750 /* GoogleSignInSwift */; };
@@ -49,6 +55,7 @@
 		518B57C72A2BAC72001FFD10 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		518B57CA2A2BB46C001FFD10 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		92689267DD6668908F976BE6 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
+		F01F544B2A3A3CD500635175 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F03575592A348AEE00DD098F /* Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Messenger.entitlements; sourceTree = "<group>"; };
 		F055F7B22A358F870043C750 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,10 +65,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F01F54472A3A38A500635175 /* RealmSwift in Frameworks */,
+				F01F54452A3A38A500635175 /* Realm in Frameworks */,
 				F0D76A472A3497B900BB3F88 /* FacebookLogin in Frameworks */,
 				AA15C828767F83A967D9C259 /* Pods_Messenger.framework in Frameworks */,
 				F055F7B62A35907B0043C750 /* GoogleSignIn in Frameworks */,
+				F01F54422A3A379000635175 /* MessageKit in Frameworks */,
+				F01F544A2A3A38F100635175 /* SDWebImage in Frameworks */,
 				F055F7B82A35907B0043C750 /* GoogleSignInSwift in Frameworks */,
+				F01F543F2A3A36B800635175 /* JGProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +140,7 @@
 				518B57C32A2BAC3C001FFD10 /* VideoPlayerViewController.swift */,
 				518B57C52A2BAC6A001FFD10 /* NewConversationViewController.swift */,
 				518B57C72A2BAC72001FFD10 /* ProfileViewController.swift */,
+				F01F544B2A3A3CD500635175 /* ChatViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -206,6 +219,11 @@
 				F0D76A462A3497B900BB3F88 /* FacebookLogin */,
 				F055F7B52A35907B0043C750 /* GoogleSignIn */,
 				F055F7B72A35907B0043C750 /* GoogleSignInSwift */,
+				F01F543E2A3A36B800635175 /* JGProgressHUD */,
+				F01F54412A3A379000635175 /* MessageKit */,
+				F01F54442A3A38A500635175 /* Realm */,
+				F01F54462A3A38A500635175 /* RealmSwift */,
+				F01F54492A3A38F100635175 /* SDWebImage */,
 			);
 			productName = Messenger;
 			productReference = 518B579F2A2BA8C1001FFD10 /* Messenger.app */;
@@ -238,6 +256,10 @@
 			packageReferences = (
 				F0D76A452A3497B900BB3F88 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				F055F7B42A35907B0043C750 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				F01F543D2A3A36B800635175 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				F01F54402A3A379000635175 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				F01F54432A3A38A500635175 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				F01F54482A3A38F100635175 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 518B57A02A2BA8C1001FFD10 /* Products */;
 			projectDirPath = "";
@@ -319,6 +341,7 @@
 				518B57A32A2BA8C1001FFD10 /* AppDelegate.swift in Sources */,
 				518B57C82A2BAC72001FFD10 /* ProfileViewController.swift in Sources */,
 				518B57A52A2BA8C1001FFD10 /* SceneDelegate.swift in Sources */,
+				F01F544C2A3A3CD500635175 /* ChatViewController.swift in Sources */,
 				518B57C22A2BAC30001FFD10 /* PhotoViewerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,6 +580,38 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F01F543D2A3A36B800635175 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		F01F54402A3A379000635175 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		F01F54432A3A38A500635175 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		F01F54482A3A38F100635175 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		F055F7B42A35907B0043C750 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -576,6 +631,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F01F543E2A3A36B800635175 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F01F543D2A3A36B800635175 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+		F01F54412A3A379000635175 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F01F54402A3A379000635175 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+		F01F54442A3A38A500635175 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F01F54432A3A38A500635175 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		F01F54462A3A38A500635175 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F01F54432A3A38A500635175 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		F01F54492A3A38F100635175 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F01F54482A3A38F100635175 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
 		F055F7B52A35907B0043C750 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F055F7B42A35907B0043C750 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
