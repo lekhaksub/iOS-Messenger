@@ -5,4 +5,8 @@
 ### Firebase
 ### Facebook Login
 ### Google Signin
+### MessageKIt
+### JGProgressHUD
+### RealmSwift
+### SDWebImage
 
